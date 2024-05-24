@@ -1,26 +1,58 @@
-# Ensure your script is not named selenium.py
 
-# Import required classes from selenium
-import selenium
 import time
 from selenium import webdriver
+import selenium
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import os
 
-# Ensure chromedriver.exe is in the correct path or provide the full path
-service = Service("C:/Users/User/OneDrive/Рабочий стол/selenium/chromedriver.exe")
 
-# Create an instance of ChromeOptions
+service = Service("chromedriver.exe")
 options = webdriver.ChromeOptions()
-
-# Initialize the WebDriver with the service and options
 driver = webdriver.Chrome(service=service, options=options)
-
-# Navigate to the specified URL
+driver.maximize_window()
 driver.get("https://userinyerface.com/game.html")
-time.sleep(15)
 
-# Add additional code here if you need to interact with the page
+wait = WebDriverWait(driver, 10)
+eleCookiesDiv = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'div.cookies')))
 
-# Close the driver
-driver.quit()
+
+background_color = eleCookiesDiv.value_of_css_property("background-color")
+height = float(eleCookiesDiv.size['height'])
+print(background_color == "rgba(255, 0, 0, 1)")
+print(height == 155.2)
+
+width = eleCookiesDiv.value_of_css_property("width")
+height = float(eleCookiesDiv.size['height'])  # Convert height to float
+print(width == '300px')
+print(height == 175)
+
+# service = Service("C:/Users/User/OneDrive/Рабочий стол/selenium/chromedriver.exe")
+
+# options = webdriver.ChromeOptions()
+
+
+# driver = webdriver.Chrome(service=service, options=options)
+
+# driver.get("https://userinyerface.com/game.html")
+# time.sleep(15)
+
+
+
+# wait = WebDriverWait(driver, 10)
+# eleCookiesDiv = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, 'div.cookies')))
+
+
+# background_color = eleCookiesDiv.value_of_css_property("background-color")
+# height = float(eleCookiesDiv.size['height'])
+# print(background_color == "rgba(255, 0, 0, 1)")
+# print(height == 155.2)
+
+# width = eleCookiesDiv.value_of_css_property("width")
+# height = float(eleCookiesDiv.size['height'])
+# print(width == '300px')
+# print(height == 175)
